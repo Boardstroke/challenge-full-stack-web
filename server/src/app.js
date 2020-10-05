@@ -3,14 +3,17 @@ const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const routes = require('./routes');
+const {sequelize} = require('./models');
+
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json())
 app.use(logger('tiny'))
 
-app.get('/', (req,res) => {
-  res.send("hello world")
-})
+routes(app);
 
-app.listen(3000, () => console.log('Porta 3000'))
+sequelize.sync({alter: true}).then(() => {
+  app.listen(3000);
+})
