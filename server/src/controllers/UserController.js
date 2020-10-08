@@ -21,7 +21,6 @@ module.exports = {
       const { id } = req.params;
 
       if (isNaN(id) || !Number.isInteger(parseInt(id)) || parseInt(id) < 0) {
-
         let err = new Error();
         err.name = "Validation Error";
         err.message = "id inválido, id precisa ser um inteiro positivo";
@@ -29,15 +28,14 @@ module.exports = {
         err.path = "id";
 
         throw err;
-
       } else {
         const userById = await user.findOne({
           where: { id: req.params.id },
         });
-        if(userById){
+        if (userById) {
           res.status(200).send(userById);
-        }else{
-          res.status(404).send({message: 'User not found'})
+        } else {
+          res.status(404).send({ message: "User not found" });
         }
       }
     } catch (err) {
@@ -90,17 +88,22 @@ module.exports = {
     }
   },
 
-  destroy: async(req,res) => {
+  destroy: async (req, res) => {
+    const { id } = req.params;
     try {
-      const {id} = req.params;
-      await user.destroy({
+      const deletedUser = await user.destroy({
         where: {
-          id: id
-        }
-      })
-      res.status(204)
-    } catch (err){
-      res.status(500).send(err)
+          id: id,
+        },
+      });
+      if(deletedUser){
+        res.sendStatus(204);
+      }else{
+        res.status(404).send({ message: "User not found" });
+      }
+
+    } catch (err) {
+      res.status(500).send(standardError);
     }
-  }
+  },
 };
