@@ -1,5 +1,10 @@
-const {index} = require( './controllers/UserControllers')
+const {create, index, getById} = require( './controllers/UserController')
 
 module.exports = (app) => {
-  app.get('/api/index', index)
+  app.route('/api/users')
+    .post(create)
+    .get(index)
+
+  app.route('/api/users/:id')
+    .get(getById)
 }

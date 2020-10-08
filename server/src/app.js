@@ -12,8 +12,14 @@ app.use(cors());
 app.use(bodyParser.json())
 app.use(logger('tiny'))
 
+app.use(function(req, res, next) {
+  res.setHeader('charset', 'utf-8')
+  res.setHeader('Content-Type', 'application/json; charset=utf-8')
+  next();
+});
+
 routes(app);
 
-sequelize.sync({alter: true}).then(() => {
+sequelize.sync({force: true}).then(() => {
   app.listen(3000);
 })
