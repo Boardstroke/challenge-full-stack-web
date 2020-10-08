@@ -146,7 +146,27 @@ module.exports = {
         case "Validation Error":
           res.status(err.status).send(err);
           break;
-
+        case "SequelizeUniqueConstraintError":
+          res.status(409).send(
+            err.errors.map((e) => ({
+              message: `Já existe uma conta vinculada com esse ${e.path}`,
+              status: 409,
+              error: e.type,
+              path: e.path,
+            }))[0]
+          );
+          break;
+        case "SequelizeValidationError":
+          console.log(err);
+          res.status(400).send(
+            err.errors.map((e) => ({
+              message: e.message,
+              status: 400,
+              error: e.type,
+              path: e.path,
+            }))[0]
+          );
+          break;
         default:
           res.status(500).send(standardError);
           break;

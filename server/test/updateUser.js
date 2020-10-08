@@ -15,20 +15,24 @@ const generateRandomNumber = () =>
 
 describe("Update users - Endpoints", () => {
   describe("PATCH /api/users/(:id)", () => {
-    let id;
-    let validUser = validUsers[generateRandomNumber()];
+    let validUser1 = validUsers[generateRandomNumber()];
+    let validUser2 = validUsers[generateRandomNumber()];
+    let id1;
+    let id2;
 
     before(async () => {
-      id = (await user.create(validUser)).id;
+      id1 = (await user.create(validUser1)).id;
+      id2 = (await user.create(validUser2)).id;
     });
     after(async () => {
-      await user.destroy({ where: { id: id } });
+      await user.destroy({ where: { id: id1 } });
+      await user.destroy({ where: { id: id2 } });
     });
 
     it("Should update 'nome' of user(:id), with (Nome Valido) -- 204", async () => {
       const res = await chai
         .request("http://localhost:3000")
-        .patch(`/api/users/${id}`)
+        .patch(`/api/users/${id1}`)
         .send({ nome: "Nome valido" });
 
       res.should.have.status(204);
@@ -37,7 +41,7 @@ describe("Update users - Endpoints", () => {
     it("Should update 'email' of user(:id), with (email@valido.com) -- 204", async () => {
       const res = await chai
         .request("http://localhost:3000")
-        .patch(`/api/users/${id}`)
+        .patch(`/api/users/${id1}`)
         .send({ email: "email@valido.com" });
 
       res.should.have.status(204);
@@ -46,7 +50,7 @@ describe("Update users - Endpoints", () => {
     it("Should return error when try to update 'cpf' -- 400", async() => {
       const res = await chai
         .request("http://localhost:3000")
-        .patch(`/api/users/${id}`)
+        .patch(`/api/users/${id1}`)
         .send({ cpf: "006.874.947-48" });
 
       res.should.have.status(400);
@@ -56,13 +60,22 @@ describe("Update users - Endpoints", () => {
     it("Should return error when try to update 'registro_academico' -- 400", async() => {
       const res = await chai
         .request("http://localhost:3000")
-        .patch(`/api/users/${id}`)
+        .patch(`/api/users/${id1}`)
         .send({ registro_academico: "teste.pdf" });
 
       res.should.have.status(400);
       assert.equal(res.body.message, 'Não é possivel modificar o campo registro academico')
     })
 
+    it("Should return that user email is already in use -- 409", async() => {
+      const res = await chai
+        .request("http://localhost:3000")
+        .patch(`/api/users/${id1}`)
+        .send({ email: validUser2.email });
+
+      res.should.have.status(409);
+      assert.equal(res.body.message, 'Já existe uma conta vinculada com esse email')
+    })
 
   });
 });
