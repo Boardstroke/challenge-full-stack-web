@@ -47,6 +47,7 @@ module.exports = (Sequelize, dataType) => {
     registro_academico: {
       type: dataType.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notNull: { msg: "Registro acadêmico inválido" },
       },
