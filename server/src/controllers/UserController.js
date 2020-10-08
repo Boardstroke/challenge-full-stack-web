@@ -45,7 +45,6 @@ module.exports = {
           break;
         default:
           res.status(500).send(standardError);
-          break;
       }
     }
   },
@@ -91,19 +90,32 @@ module.exports = {
   destroy: async (req, res) => {
     const { id } = req.params;
     try {
+      if (isNaN(id) || !Number.isInteger(parseInt(id)) || parseInt(id) < 0) {
+        let err = new Error();
+        err.name = "Validation Error";
+        err.message = "id inválido, id precisa ser um inteiro positivo";
+        err.status = 400;
+        err.path = "id";
+        throw err;
+      }
       const deletedUser = await user.destroy({
         where: {
           id: id,
         },
       });
-      if(deletedUser){
+      if (deletedUser) {
         res.sendStatus(204);
-      }else{
+      } else {
         res.status(404).send({ message: "User not found" });
       }
-
     } catch (err) {
-      res.status(500).send(standardError);
+      switch (err.name) {
+        case "Validation Error":
+          res.status(400).send(err);
+          break;
+        default:
+          res.status(500).send(standardError);
+      }
     }
   },
 };

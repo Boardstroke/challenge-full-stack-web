@@ -57,7 +57,7 @@ describe("Get users - Endpoints", () => {
   });
 
   it("Should return user not found -- 404", async () => {
-    const res = await chai.request("http://localhost:3000").get(`/api/users/7`);
+    const res = await chai.request("http://localhost:3000").get(`/api/users/999`);
     res.should.have.status(404);
   });
 

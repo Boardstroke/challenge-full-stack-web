@@ -30,6 +30,7 @@ describe("Delete users - Endpoints", () => {
       let newUser = await user.create(validUser);
       id = newUser.id;
     });
+
     after(async () => {
       await user.destroy({
         where: { id : id}
@@ -47,7 +48,8 @@ describe("Delete users - Endpoints", () => {
     });
 
     it("Should return invalid id -- 400", async () => {
-      // TODO
+      let res = await chai.request("http://localhost:3000").del('/api/users/-1')
+      res.should.have.status(400)
     });
   });
 });
