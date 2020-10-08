@@ -37,7 +37,7 @@ module.exports = {
         if(userById){
           res.status(200).send(userById);
         }else{
-          res.status(404).send({})
+          res.status(404).send({message: 'User not found'})
         }
       }
     } catch (err) {
@@ -51,6 +51,7 @@ module.exports = {
       }
     }
   },
+
   create: async (req, res) => {
     try {
       if (req.body === {}) {
@@ -88,4 +89,18 @@ module.exports = {
       }
     }
   },
+
+  destroy: async(req,res) => {
+    try {
+      const {id} = req.params;
+      await user.destroy({
+        where: {
+          id: id
+        }
+      })
+      res.status(204)
+    } catch (err){
+      res.status(500).send(err)
+    }
+  }
 };
