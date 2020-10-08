@@ -69,7 +69,6 @@ module.exports = {
           );
           break;
         case "SequelizeValidationError":
-          console.log(err);
           res.status(400).send(
             err.errors.map((e) => ({
               message: e.message,
@@ -157,7 +156,6 @@ module.exports = {
           );
           break;
         case "SequelizeValidationError":
-          console.log(err);
           res.status(400).send(
             err.errors.map((e) => ({
               message: e.message,

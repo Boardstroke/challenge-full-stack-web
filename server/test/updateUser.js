@@ -77,5 +77,25 @@ describe("Update users - Endpoints", () => {
       assert.equal(res.body.message, 'Já existe uma conta vinculada com esse email')
     })
 
+    it("Should return that user 'email' is invalid -- 400", async() => {
+      const res = await chai
+        .request("http://localhost:3000")
+        .patch(`/api/users/${id1}`)
+        .send({ email: '' });
+
+      res.should.have.status(400);
+      assert.equal(res.body.message, 'Email inválido')
+    })
+
+    it("Should return that user 'nome' is empty -- 400", async() => {
+      const res = await chai
+        .request("http://localhost:3000")
+        .patch(`/api/users/${id1}`)
+        .send({ nome: '' });
+
+      res.should.have.status(400);
+      assert.equal(res.body.message, 'Preencha o nome')
+    })
+
   });
 });
