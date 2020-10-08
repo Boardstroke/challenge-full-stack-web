@@ -125,7 +125,9 @@ module.exports = {
       let userToUpdate =  await user.findOne({
           where: { id: id },
         });
-      userToUpdate.email = req.body.email;
+      for(const key in req.body){
+        userToUpdate[key] = req.body[key]
+      }
       await userToUpdate.save({ fields: ['nome', 'email']});
       res.sendStatus(204)
     } catch(err){
