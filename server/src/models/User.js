@@ -11,6 +11,7 @@ module.exports = (Sequelize, dataType) => {
       allowNull: false,
       validate: {
         notNull: { msg: "Preencha o nome" },
+        notEmpty: { msg: "Preencha o nome"}
       },
     },
 
