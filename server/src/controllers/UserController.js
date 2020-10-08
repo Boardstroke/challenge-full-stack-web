@@ -121,18 +121,36 @@ module.exports = {
 
   update: async (req, res) => {
     const { id } = req.params;
-    try{
-      let userToUpdate =  await user.findOne({
-          where: { id: id },
-        });
-      for(const key in req.body){
-        userToUpdate[key] = req.body[key]
+    try {
+      let userToUpdate = await user.findOne({
+        where: { id: id },
+      });
+      for (const key in req.body) {
+        userToUpdate[key] = req.body[key];
+        if (key === "cpf" || key === "registro_academico") {
+          let err = new Error("Invalid Request");
+          err = {
+            name: "Validation Error",
+            message: `Não é possivel modificar o campo ${key.split('_').join(' ')}`,
+            status: 400,
+            path: `${key}`,
+          };
+          throw err;
+        }
       }
-      await userToUpdate.save({ fields: ['nome', 'email']});
-      res.sendStatus(204)
-    } catch(err){
-      console.log(err)
-      res.status(500).send(JSON.stringify(err))
+      await userToUpdate.save({ fields: ["nome", "email"] });
+
+      res.sendStatus(204);
+    } catch (err) {
+      switch (err.name) {
+        case "Validation Error":
+          res.status(err.status).send(err);
+          break;
+
+        default:
+          res.status(500).send(standardError);
+          break;
+      }
     }
-  }
+  },
 };

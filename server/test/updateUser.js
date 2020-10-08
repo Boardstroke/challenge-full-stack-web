@@ -42,5 +42,27 @@ describe("Update users - Endpoints", () => {
 
       res.should.have.status(204);
     });
+
+    it("Should return error when try to update 'cpf' -- 400", async() => {
+      const res = await chai
+        .request("http://localhost:3000")
+        .patch(`/api/users/${id}`)
+        .send({ cpf: "006.874.947-48" });
+
+      res.should.have.status(400);
+      assert.equal(res.body.message, 'Não é possivel modificar o campo cpf')
+    })
+
+    it("Should return error when try to update 'registro_academico' -- 400", async() => {
+      const res = await chai
+        .request("http://localhost:3000")
+        .patch(`/api/users/${id}`)
+        .send({ registro_academico: "teste.pdf" });
+
+      res.should.have.status(400);
+      assert.equal(res.body.message, 'Não é possivel modificar o campo registro academico')
+    })
+
+
   });
 });
