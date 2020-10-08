@@ -30,7 +30,7 @@ module.exports = {
         throw err;
       } else {
         const userById = await user.findOne({
-          where: { id: req.params.id },
+          where: { id: id },
         });
         if (userById) {
           res.status(200).send(userById);
@@ -118,4 +118,19 @@ module.exports = {
       }
     }
   },
+
+  update: async (req, res) => {
+    const { id } = req.params;
+    try{
+      let userToUpdate =  await user.findOne({
+          where: { id: id },
+        });
+      userToUpdate.email = req.body.email;
+      await userToUpdate.save({ fields: ['nome', 'email']});
+      res.sendStatus(204)
+    } catch(err){
+      console.log(err)
+      res.status(500).send(JSON.stringify(err))
+    }
+  }
 };
