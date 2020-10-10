@@ -1,30 +1,29 @@
 <template>
-  <v-app>
+<!-- App.vue -->
+
+<v-app>
+
+  <!-- Sizes your content based upon application components -->
   <v-main>
 
     <!-- Provides the application the proper gutter -->
     <v-container fluid>
 
       <!-- If using vue-router -->
-      <!-- <router-view> -->
-        <IndexUsers/>
-      <!-- </router-view> -->
-
+      <router-view></router-view>
     </v-container>
   </v-main>
-  </v-app>
+
+  <v-footer app>
+    <!-- -->
+  </v-footer>
+</v-app>
+
 </template>
 
+
 <script>
-import IndexUsers from '@/pages/IndexUsers.vue'
-
 export default {
-  name: 'App',
-  components: {
-    'IndexUsers': IndexUsers
-  }
-
-
-
+  name: "App",
 };
 </script>
