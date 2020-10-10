@@ -1,7 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTrashAlt, faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+library.add(faTrashAlt, faPen)
+
+Vue.component('fa', FontAwesomeIcon)
+
+import './index.scss';
 Vue.config.productionTip = false
 
 new Vue({

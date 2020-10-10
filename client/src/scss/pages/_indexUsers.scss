@@ -1,0 +1,17 @@
+.indexUsers{
+  h2{
+    font: 'Segoe UI';
+    font-weight: 800;
+  }
+  .options{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    .search{
+      max-width: 300px;
+    }
+    .show-pages{
+      max-width: 150px
+    }
+  }
+}

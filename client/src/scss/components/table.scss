@@ -1,0 +1,50 @@
+table.users-table {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  border: 1px solid transparent;
+
+  // background-color: white;
+  tr {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    &:hover{
+      box-shadow: 0 6px 10px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+    &.header{
+      &:hover{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      }
+    }
+    td,
+    th {
+      background-color: #fafafa;
+    }
+
+    th {
+      padding: 10px 20px;
+      color: rgba($color: #000000, $alpha: 0.5);
+      font-weight: 800;
+      font-size: 10pt;
+      &.actions{
+        text-align: center;
+      }
+    }
+    td {
+      padding: 20px 20px;
+      &.actions{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        button.delete{
+          color: #f44336
+        }
+        button.edit{
+          color: #3f51b5  ;
+        }
+      }
+    }
+  }
+}

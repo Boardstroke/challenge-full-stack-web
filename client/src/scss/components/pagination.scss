@@ -1,0 +1,12 @@
+.pagination{
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  height: 100%;
+  .v-btn{
+    position: relative;
+    top: 5px;
+    margin-right: 20px;
+  }
+
+}
