@@ -1,16 +1,16 @@
 <template>
   <div class="pagination">
     <v-btn icon @click="paginate(1)" :disabled="isFirstPage">
-      <v-icon> mdi-chevron-double-left </v-icon>
+      <v-icon>mdi-chevron-double-left </v-icon>
     </v-btn>
     <v-btn icon @click="paginate(currentPage - 1)" :disabled="isFirstPage">
-      <v-icon> mdi-chevron-left </v-icon>
+      <v-icon>mdi-chevron-left </v-icon>
     </v-btn>
     <v-btn icon @click="paginate(currentPage + 1)" :disabled="isLastPage">
-      <v-icon> mdi-chevron-right </v-icon>
+      <v-icon>mdi-chevron-right </v-icon>
     </v-btn>
     <v-btn icon @click="paginate(totalNumberOfPages)" :disabled="isLastPage">
-      <v-icon> mdi-chevron-double-right </v-icon>
+      <v-icon>mdi-chevron-double-right </v-icon>
     </v-btn>
     <v-select
       :value="usersPerPage"
@@ -31,20 +31,18 @@ export default {
     currentPage: Number,
     usersPerPage: Object,
     handleSelectChange: Function,
-    totalUsers: Number
+    totalUsers: Number,
   },
-  computed:{
-
-    isFirstPage: function(){
-      return this.currentPage === 1
+  computed: {
+    isFirstPage: function () {
+      return this.currentPage === 1;
     },
-    totalNumberOfPages: function(){
-      return Math.ceil(this.totalUsers / this.usersPerPage.value)
+    totalNumberOfPages: function () {
+      return Math.ceil(this.totalUsers / this.usersPerPage.value);
     },
-    isLastPage: function(){
-      return this.currentPage === this.totalNumberOfPages
-    }
-
-  }
+    isLastPage: function () {
+      return this.currentPage === this.totalNumberOfPages;
+    },
+  },
 };
 </script>
