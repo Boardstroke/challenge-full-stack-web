@@ -18,3 +18,12 @@ export const createUser = async (data) => {
     body: await response.json(),
   };
 };
+
+export const deleteUser = async (id) => {
+  let response = await api(`users/${id}`, {
+    method: "DELETE",
+  });
+  return {
+    status: response.status,
+  };
+};

@@ -31,14 +31,15 @@
 
     <v-divider></v-divider>
 
-    <UsersTable :users="filterUsers" />
+    <UsersTable :users="filterUsers" :deleteUser="removeUser" />
   </v-container>
-</template>
+</template>deleteUser
 
 <script>
 import UsersTable from "@/components/UsersTable.vue";
 import Pagination from "@/components/Pagination.vue";
-import { index } from "@/services/users";
+//eslint-disable-next-line
+import { index, deleteUser } from "@/services/users";
 export default {
   components: {
     UsersTable: UsersTable,
@@ -118,7 +119,16 @@ export default {
         text: `Mostrar ${value}`,
         value: value
       }
+    },
+    async removeUser(id){
+      deleteUser(id).then((response) => {
+        console.log(response)
+        if(response.status >= 200 && response.status <= 299){
+          this.users =  [...this.users].filter(user => user.id != id)
+        }
+      })
     }
+
   },
 };
 </script>

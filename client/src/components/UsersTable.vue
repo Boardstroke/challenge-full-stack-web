@@ -17,7 +17,7 @@
           <button class="edit">
             <fa  icon="pen"/>
           </button>
-          <button class="delete" v-on:click="deleteUser(user.id)">
+          <button class="delete" @click="deleteUser(user.id)">
             <fa icon="trash-alt"/>
           </button>
         </td>
@@ -28,7 +28,7 @@
 </template>
 <script>
 export default {
-  props: { users: Array },
+  props: { users: Array, deleteUser: Function },
 
   data: () => ({
     headers: [
@@ -54,10 +54,5 @@ export default {
       },
     ],
   }),
-  methods: {
-    deleteUser(userId) {
-      console.log(userId);
-    },
-  },
 };
 </script>
