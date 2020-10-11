@@ -5,9 +5,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/users',
+    path: '/',
     name: 'IndexUsers',
     component: require('@/pages/IndexUsers.vue').default
+  },
+  {
+    path: '/cadastro',
+    name: 'CreateUser',
+    component: require('@/pages/CreateUser.vue').default
   }
 ]
 

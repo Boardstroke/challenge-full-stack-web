@@ -15,7 +15,7 @@
   </v-main>
 
   <v-footer app>
-    <!-- -->
+    Footer
   </v-footer>
 </v-app>
 

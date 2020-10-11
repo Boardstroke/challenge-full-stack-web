@@ -1,6 +1,14 @@
 <template>
-  <div class="indexUsers">
+  <v-container class="indexUsers">
+    <header>
     <h2>Usuários</h2>
+    <v-btn href="/cadastro" color="primary">
+      <v-icon left >
+        mdi-account-plus
+      </v-icon>
+      Criar usuário
+      </v-btn>
+    </header>
     <nav class="options">
       <v-text-field
         class="search"
@@ -24,7 +32,7 @@
     <v-divider></v-divider>
 
     <UsersTable :users="filterUsers" />
-  </div>
+  </v-container>
 </template>
 
 <script>

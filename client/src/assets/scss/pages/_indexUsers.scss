@@ -1,7 +1,14 @@
 .indexUsers{
+  header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
   h2{
     font: 'Segoe UI';
     font-weight: 800;
+    font-size: 32px;
   }
   .options{
     margin-top: 20px;
