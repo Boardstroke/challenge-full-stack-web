@@ -2,38 +2,46 @@
   <v-container class="cadastro">
     <header>
       <h2>Criar usuário</h2>
-      <v-btn>Cancelar</v-btn>
+      <v-btn to="/">Cancelar</v-btn>
     </header>
     <v-form>
-      <v-text-field
-        v-model="form.nome"
-        label="Nome"
-        required
-        solo
-        :rules="rules.nome"
-      ></v-text-field>
-      <v-text-field
-        v-model="form.email"
-        label="Email"
-        :rules="rules.email"
-        required
-        solo
-      ></v-text-field>
-      <v-text-field
-        v-model="form.cpf"
-        label="CPF"
-        :rules="rules.cpf"
-        required
-        solo
-        v-mask="'###.###.###-##'"
-      ></v-text-field>
-      <v-text-field
-        v-model="form.registro_academico"
-        label="Registro Acadêmico"
-        required
-        solo
-        :rules="rules.ra"
-      ></v-text-field>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-model="form.nome"
+            label="Nome"
+            solo
+            :rules="rules.nome"
+          />
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-model="form.email"
+            label="Email"
+            :rules="rules.email"
+            required
+            solo
+          />
+        </v-col>
+        <v-col cols="12" md="6"
+          ><v-text-field
+            v-model="form.cpf"
+            label="CPF"
+            :rules="rules.cpf"
+            required
+            solo
+            v-mask="'###.###.###-##'"
+        /></v-col>
+        <v-col cols="12" md="6">
+          <v-text-field
+            v-model="form.registro_academico"
+            label="Registro Acadêmico"
+            required
+            solo
+            :rules="rules.ra"
+          />
+        </v-col>
+      </v-row>
     </v-form>
     <section class="action">
       <v-btn @click="createNewUser">Salvar</v-btn>

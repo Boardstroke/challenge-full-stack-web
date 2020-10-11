@@ -2,7 +2,7 @@
   <v-container class="indexUsers">
     <header>
     <h2>Usuários</h2>
-    <v-btn href="/cadastro" color="primary">
+    <v-btn to="/cadastro" color="primary">
       <v-icon left >
         mdi-account-plus
       </v-icon>

@@ -13,6 +13,11 @@ const routes = [
     path: '/cadastro',
     name: 'CreateUser',
     component: require('@/pages/CreateUser.vue').default
+  },
+  {
+    path: '/cadastro/:id',
+    name: 'UpdateUser',
+    component: require('@/pages/UpdateUser.vue').default
   }
 ]
 

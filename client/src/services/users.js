@@ -8,6 +8,14 @@ export const index = async () => {
   };
 };
 
+export const getUser = async (id) => {
+  let response = await api(`users/${id}`);
+  return {
+    status: response.status,
+    body: await response.json(),
+  };
+};
+
 export const createUser = async (data) => {
   let response = await api("users", {
     method: "POST",
@@ -16,6 +24,16 @@ export const createUser = async (data) => {
   return {
     status: response.status,
     body: await response.json(),
+  };
+};
+
+export const updateUser = async (id, data) => {
+  let response = await api(`users/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  });
+  return {
+    status: response.status,
   };
 };
 

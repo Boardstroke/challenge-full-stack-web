@@ -14,12 +14,12 @@
           {{ user[headItem.name] }}
         </td>
         <td class="actions">
-          <button class="edit">
+          <v-btn class="edit" color="primary" icon :to="'cadastro/' + user.id">
             <fa  icon="pen"/>
-          </button>
-          <button class="delete" @click="deleteUser(user.id)">
+          </v-btn>
+          <v-btn icon class="delete" @click="deleteUser(user.id)">
             <fa icon="trash-alt"/>
-          </button>
+          </v-btn>
         </td>
       </tr>
     </tbody>
