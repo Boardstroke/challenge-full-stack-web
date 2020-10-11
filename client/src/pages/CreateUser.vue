@@ -6,33 +6,33 @@
     </header>
     <v-form>
       <v-text-field
-        v-model="nome"
+        v-model="form.nome"
         label="Nome"
         required
         solo
-        :rules="nomeRules"
+        :rules="rules.nome"
       ></v-text-field>
       <v-text-field
-        v-model="email"
+        v-model="form.email"
         label="Email"
-        :rules="emailRules"
+        :rules="rules.email"
         required
         solo
       ></v-text-field>
       <v-text-field
-        v-model="cpf"
+        v-model="form.cpf"
         label="CPF"
-        :rules="cpfRules"
+        :rules="rules.cpf"
         required
         solo
         v-mask="'###.###.###-##'"
       ></v-text-field>
       <v-text-field
-        v-model="registro_academico"
+        v-model="form.registro_academico"
         label="Registro Acadêmico"
         required
         solo
-        :rules="raRules"
+        :rules="rules.ra"
       ></v-text-field>
     </v-form>
     <section class="action">
@@ -49,32 +49,30 @@ let emailRe = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(
 let cpfRe = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/i;
 export default {
   data: () => ({
-    nome: "",
-    email: "",
-    cpf: "",
-    registro_academico: "",
-    nomeRules: [(v) => !!v || "Nome é necessário"],
-    emailRules: [
+    form: {
+      nome: "",
+      email: "",
+      cpf: "",
+      registro_academico: ""
+    },
+    rules:{
+      nome: [(v) => !!v || "Nome é necessário"],
+      email: [
       (v) => !!v || "Email é necessário",
       (v) => emailRe.test(v) || "Email deve ser válido",
-    ],
-    cpfRules: [
+      ],
+      cpf: [
       (v) => !!v || "CPF é necessário",
       (v) => cpfRe.test(v) || "CPF deve ser válido",
-    ],
-    raRules: [(v) => !!v || "Registro acadêmico é necessário"],
+      ],
+      ra: [(v) => !!v || "Registro acadêmico é necessário"]
+
+    },
   }),
   methods: {
     async createNewUser() {
-      let { status, body } = await createUser({
-
-        nome: this.nome,
-
-        email: this.email,
-        cpf: this.cpf,
-        registro_academico: this.registro_academico,
-      });
-      console.log(status, body);
+      let { status } = await createUser(this.form);
+      console.log(status);
     },
   },
 };
