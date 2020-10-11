@@ -7,7 +7,10 @@ const routes = [
   {
     path: '/',
     name: 'IndexUsers',
-    component: require('@/pages/IndexUsers.vue').default
+    component: require('@/pages/IndexUsers.vue').default,
+     meta: {
+      title: 'About Page - Example App',
+    }
   },
   {
     path: '/cadastro',

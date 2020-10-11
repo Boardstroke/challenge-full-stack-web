@@ -14,8 +14,9 @@
     </v-container>
   </v-main>
   <Snackbar/>
-  <v-footer app>
-    Footer
+  <v-footer app class="footer">
+    <small>Criado por Matheus Fachini</small>
+    <small><a href="https://github.com/Boardstroke/" target="_blank"><v-icon left> mdi-github </v-icon> Boardstroke</a></small>
   </v-footer>
 </v-app>
 

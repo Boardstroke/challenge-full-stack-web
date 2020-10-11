@@ -54,7 +54,6 @@ module.exports = {
       if (req.body == {}) {
         throw new Error("Preencha os campos obrigatórios");
       }
-      console.log(req.body)
       const newUser = await user.create(req.body);
       res.status(201).send(newUser);
     } catch (err) {

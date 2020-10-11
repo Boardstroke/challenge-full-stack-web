@@ -131,7 +131,6 @@ export default {
     },
     async removeUser(id) {
       deleteUser(id).then((response) => {
-        console.log(response);
         if (response.status >= 200 && response.status <= 299) {
           this.users = [...this.users].filter((user) => user.id != id);
           this.handleSnackbar('Usuário excluído com sucesso', 'success')

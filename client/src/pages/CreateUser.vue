@@ -1,8 +1,9 @@
 <template>
+
   <v-container class="cadastro">
     <header>
       <h2>Criar usuário</h2>
-      <v-btn to="/">Cancelar</v-btn>
+      <v-btn dark color="red" to="/">Cancelar</v-btn>
     </header>
     <v-form>
       <v-row>
@@ -10,7 +11,6 @@
           <v-text-field
             v-model="form.nome"
             label="Nome"
-            to="../"
             solo
             :rules="rules.nome"
           />
@@ -45,7 +45,7 @@
       </v-row>
     </v-form>
     <section class="action">
-      <v-btn @click="createNewUser">Salvar</v-btn>
+      <v-btn color="green" dark @click="createNewUser">Salvar</v-btn>
     </section>
   </v-container>
 </template>
@@ -79,14 +79,21 @@ export default {
   }),
   methods: {
     async createNewUser() {
-      let { status } = await createUser(this.form);
-      if (status === 201)
+      let { status, body } = await createUser(this.form);
+      if (status >= 200 && status <= 299){
         this.$EventBus.$emit(
           "showSnackbar",
           "Usuário criado com sucesso",
           "success"
         );
         this.$router.push('/');
+      }else{
+        this.$EventBus.$emit(
+          "showSnackbar",
+          body.message,
+          "error"
+        );
+      }
     },
   },
 };

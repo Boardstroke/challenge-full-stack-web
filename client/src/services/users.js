@@ -34,6 +34,7 @@ export const updateUser = async (id, data) => {
   });
   return {
     status: response.status,
+    body: response.status === 204 ? {} : await response.json()
   };
 };
 
@@ -43,5 +44,6 @@ export const deleteUser = async (id) => {
   });
   return {
     status: response.status,
+    body: response.status === 204 ? {} : await response.json()
   };
 };
