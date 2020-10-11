@@ -9,7 +9,7 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="form.nome"
-            label="Nome"
+            label="Nome" to="../"
             solo
             :rules="rules.nome"
           />

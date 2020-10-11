@@ -1,12 +1,10 @@
 <template>
   <v-container class="indexUsers">
     <header>
-    <h2>Usuários</h2>
-    <v-btn to="/cadastro" color="primary">
-      <v-icon left >
-        mdi-account-plus
-      </v-icon>
-      Criar usuário
+      <h2>Usuários</h2>
+      <v-btn to="/cadastro" color="primary">
+        <v-icon left> mdi-account-plus </v-icon>
+        Criar usuário
       </v-btn>
     </header>
     <nav class="options">
@@ -32,13 +30,19 @@
     <v-divider></v-divider>
 
     <UsersTable :users="filterUsers" :deleteUser="removeUser" />
+
+    <v-overlay :value="loading">
+      <v-progress-circular
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </v-container>
-</template>deleteUser
+</template>
 
 <script>
 import UsersTable from "@/components/UsersTable.vue";
 import Pagination from "@/components/Pagination.vue";
-//eslint-disable-next-line
 import { index, deleteUser } from "@/services/users";
 export default {
   components: {
@@ -46,7 +50,7 @@ export default {
     Pagination: Pagination,
   },
   data: () => ({
-    error: false,
+    error: "",
     users: [],
     loading: true,
     currentPage: 1,
@@ -101,33 +105,39 @@ export default {
 
       return currents;
     },
-
-
-
-
   },
   methods: {
     async fetchUsers() {
       let { status, body } = await index();
-      if ((status <= 299) & (status >= 200)) this.users = body;
+      if ((status <= 299) & (status >= 200)) {
+        this.users = body;
+      } else {
+        this.error = body.message;
+        this.snackbar = true;
+      }
+      this.loading = false
     },
     paginate(numberOfPage) {
       this.currentPage = numberOfPage;
     },
-    handleSelectChange(value){
+    handleSelectChange(value) {
       this.usersPerPage = {
         text: `Mostrar ${value}`,
-        value: value
-      }
+        value: value,
+      };
     },
-    async removeUser(id){
+    handleSnackbar(message,status){
+      return this.$EventBus.$emit('showSnackbar', message, status)
+    },
+    async removeUser(id) {
       deleteUser(id).then((response) => {
-        console.log(response)
-        if(response.status >= 200 && response.status <= 299){
-          this.users =  [...this.users].filter(user => user.id != id)
+        console.log(response);
+        if (response.status >= 200 && response.status <= 299) {
+          this.users = [...this.users].filter((user) => user.id != id);
+          this.handleSnackbar('Usuário excluído com sucesso', 'success')
         }
-      })
-    }
+      });
+    },
 
   },
 };

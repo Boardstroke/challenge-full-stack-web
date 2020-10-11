@@ -13,7 +13,7 @@
       <router-view></router-view>
     </v-container>
   </v-main>
-
+  <Snackbar/>
   <v-footer app>
     Footer
   </v-footer>

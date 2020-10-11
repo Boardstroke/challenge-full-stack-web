@@ -2,8 +2,10 @@
   header{
     position: relative;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
+
   }
   h2{
     font: 'Segoe UI';
@@ -19,6 +21,15 @@
     }
     .show-pages{
       max-width: 150px
+    }
+    @media screen and (max-width: 720px) {
+      flex-direction: column;
+      .search{
+        max-width: inherit;
+      }
+      .show-pages{
+        max-width: inherit
+      }
     }
   }
 }
