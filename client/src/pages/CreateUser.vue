@@ -53,20 +53,19 @@ export default {
       nome: "",
       email: "",
       cpf: "",
-      registro_academico: ""
+      registro_academico: "",
     },
-    rules:{
+    rules: {
       nome: [(v) => !!v || "Nome é necessário"],
       email: [
-      (v) => !!v || "Email é necessário",
-      (v) => emailRe.test(v) || "Email deve ser válido",
+        (v) => !!v || "Email é necessário",
+        (v) => emailRe.test(v) || "Email deve ser válido",
       ],
       cpf: [
-      (v) => !!v || "CPF é necessário",
-      (v) => cpfRe.test(v) || "CPF deve ser válido",
+        (v) => !!v || "CPF é necessário",
+        (v) => cpfRe.test(v) || "CPF deve ser válido",
       ],
-      ra: [(v) => !!v || "Registro acadêmico é necessário"]
-
+      ra: [(v) => !!v || "Registro acadêmico é necessário"],
     },
   }),
   methods: {
