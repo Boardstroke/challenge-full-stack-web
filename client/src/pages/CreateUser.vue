@@ -9,7 +9,8 @@
         <v-col cols="12" md="6">
           <v-text-field
             v-model="form.nome"
-            label="Nome" to="../"
+            label="Nome"
+            to="../"
             solo
             :rules="rules.nome"
           />
@@ -79,7 +80,13 @@ export default {
   methods: {
     async createNewUser() {
       let { status } = await createUser(this.form);
-      console.log(status);
+      if (status === 201)
+        this.$EventBus.$emit(
+          "showSnackbar",
+          "Usuário criado com sucesso",
+          "success"
+        );
+        this.$router.push('/');
     },
   },
 };
