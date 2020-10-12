@@ -1,5 +1,5 @@
 const { user } = require("../src/models");
-const validUsers = require("../data/validUsers.json");
+const validUsers = require("../data/validUsersTest.json");
 const chai = require("chai");
 const chaiSubset = require("chai-subset");
 const chaiHttp = require("chai-http");

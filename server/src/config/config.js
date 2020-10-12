@@ -1,11 +1,29 @@
 module.exports = {
-
-    database: 'desafio_grupo_a',
-    user: 'matheus',
-    password: 'secret',
+  development: {
+    database: "desafio_grupo_a_development",
+    user: "matheus",
+    password: "secret",
     options: {
-      dialect: 'postgres',
-      host: 'localhost',
-
-    }
-}
+      dialect: "postgres",
+      host: "localhost",
+    },
+  },
+  test: {
+    database: "desafio_grupo_a_test",
+    user: "matheus",
+    password: "secret",
+    options: {
+      dialect: "postgres",
+      host: "localhost",
+    },
+  },
+  prodution: {
+    database: "desafio_grupo_a",
+    user: "matheus",
+    password: "secret",
+    options: {
+      dialect: "postgres",
+      host: "localhost",
+    },
+  }
+};

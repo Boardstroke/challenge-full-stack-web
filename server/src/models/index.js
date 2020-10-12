@@ -1,9 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
-const config = require("../config/config");
+const config = require("../config/config")[process.env.NODE_ENV];
 const db = {}
-
+console.log(process.env.NODE_ENV)
 const sequelize = new Sequelize(config.database, config.user, config.password, config.options)
 
 fs.readdirSync(__dirname)

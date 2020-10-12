@@ -3,6 +3,8 @@ const cors = require('cors');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const insertUsers = require('./config/insertUsers');
+
 const routes = require('./routes');
 const {sequelize} = require('./models');
 
@@ -26,4 +28,7 @@ routes(app);
 
 sequelize.sync({force: true}).then(() => {
   app.listen(3000);
+  if(process.env.NODE_ENV === 'development'){
+    insertUsers()
+  }
 })

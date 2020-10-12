@@ -1,4 +1,4 @@
-const validUsers = require("../data/validUsers.json");
+const validUsers = require("../data/validUsersTest.json");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/app.js",
-    "test": "node node_modules/mocha/bin/mocha"
+    "start": "NODE_ENV=production node ./src/app.js",
+    "test": "NODE_ENV=test node node_modules/mocha/bin/mocha",
+    "start:development": "NODE_ENV=development nodemon ./src/app.js"
   },
   "keywords": [],
   "author": "",
