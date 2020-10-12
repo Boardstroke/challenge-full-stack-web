@@ -17,7 +17,7 @@ module.exports = {
       host: "localhost",
     },
   },
-  prodution: {
+  production: {
     database: "desafio_grupo_a",
     user: "matheus",
     password: "secret",
